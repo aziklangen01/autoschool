@@ -29,6 +29,7 @@
   --radius-s:10px;
   --radius-m:16px;
   --container:1180px;
+  --wa-kk:"Сәлеметсіз бе! Senim автомектебі туралы толығырақ білгім келеді.";
 }
 
 *{box-sizing:border-box;}
@@ -62,6 +63,7 @@ ul{margin:0;padding:0;list-style:none;}
 @media(min-width:768px){ .wrap{padding:0 32px;} }
 
 section{position:relative;}
+section[id]{scroll-margin-top:84px;}
 .section-pad{padding:64px 0;}
 @media(min-width:768px){ .section-pad{padding:96px 0;} }
 
@@ -179,6 +181,45 @@ header{
 .nav-links a:hover{color:var(--route);}
 @media(min-width:920px){ .nav-links{display:flex;} }
 
+/* Mobile nav toggle */
+.nav-burger{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:36px;height:36px;
+  padding:0;
+  flex:none;
+}
+.nav-burger span{
+  display:block;width:20px;height:2px;
+  background:#fff;border-radius:2px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.nav-burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.is-open span:nth-child(2){opacity:0;}
+.nav-burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(min-width:920px){ .nav-burger{display:none;} }
+
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:rgba(20,23,26,0.98);
+  border-bottom:1px solid var(--line-dark);
+  padding:6px 20px 18px;
+}
+.mobile-nav.is-open{display:flex;}
+.mobile-nav a{
+  padding:13px 2px;
+  font-size:15px;
+  font-weight:600;
+  color:#E4E6E8;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.mobile-nav a:last-of-type{border-bottom:none;}
+.mobile-nav .btn{margin-top:14px;}
+@media(min-width:920px){ .mobile-nav{display:none !important;} }
+
 .header-right{
   display:flex;
   align-items:center;
@@ -208,9 +249,7 @@ header{
   font-weight:600;
   color:#fff;
   white-space:nowrap;
-  transition:color .15s ease;
 }
-.header-phone:hover{color:var(--route);}
 @media(min-width:1180px){ .header-phone{display:block;} }
 .header-cta{
   display:none;
@@ -275,6 +314,7 @@ header{
   font-size:13px;
   font-weight:700;
   color:var(--steel-light);
+  text-transform:none;
   margin-bottom:6px;
 }
 .hero-price-value{
@@ -402,4 +442,1077 @@ header{
 /* ===== Process / timeline ===== */
 .process-section{background:var(--concrete);}
 .timeline{
-  margin-top:5
+  margin-top:52px;
+  position:relative;
+}
+.timeline-line{
+  position:absolute;
+  left:27px;
+  top:8px;
+  bottom:8px;
+  width:2px;
+  background-image:linear-gradient(var(--route) 60%, transparent 40%);
+  background-size:2px 14px;
+  background-repeat:repeat-y;
+}
+@media(min-width:768px){ .timeline-line{left:35px;} }
+.step{
+  position:relative;
+  display:flex;
+  gap:20px;
+  padding-bottom:38px;
+}
+@media(min-width:768px){ .step{gap:28px;} }
+.step:last-child{padding-bottom:0;}
+.step-num{
+  flex:none;
+  width:56px;height:56px;
+  border-radius:50%;
+  background:var(--paper);
+  border:2px solid var(--route);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:18px;
+  color:var(--ink);
+  z-index:1;
+}
+@media(min-width:768px){ .step-num{width:72px;height:72px;font-size:22px;} }
+.step-body{padding-top:8px;}
+.step-title{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:19px;
+  margin-bottom:6px;
+}
+.step-text{
+  font-size:14.5px;
+  color:var(--steel);
+  max-width:44ch;
+  line-height:1.5;
+}
+
+/* ===== Trust ===== */
+.trust-section{background:var(--paper);}
+.trust-grid{
+  display:grid;
+  gap:36px;
+  margin-top:44px;
+}
+@media(min-width:860px){
+  .trust-grid{grid-template-columns:1fr 1fr;align-items:start;}
+}
+.trust-list{
+  display:grid;
+  gap:14px;
+}
+.trust-list li{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:15.5px;
+  font-weight:600;
+  padding:16px 18px;
+  background:var(--concrete);
+  border-radius:var(--radius-s);
+}
+.trust-list .mark{
+  flex:none;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--route);
+}
+.review-card{
+  background:var(--concrete);
+  border:1px dashed var(--steel-light);
+  border-radius:var(--radius-m);
+  padding:32px;
+  text-align:center;
+}
+.review-card .quote-mark{
+  font-family:'Oswald',sans-serif;
+  font-size:40px;
+  color:var(--steel-light);
+  line-height:1;
+  margin-bottom:10px;
+}
+.review-card h3{
+  font-size:17px;
+  margin-bottom:8px;
+}
+.review-card p{
+  font-size:14px;
+  color:var(--steel);
+  line-height:1.5;
+}
+
+/* ===== Instagram ===== */
+.ig-section{
+  background:var(--asphalt);
+  color:#fff;
+}
+.ig-card{
+  margin-top:40px;
+  background:var(--asphalt-2);
+  border:1px solid var(--line-dark);
+  border-radius:var(--radius-m);
+  padding:32px 26px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:24px;
+  justify-content:space-between;
+}
+.ig-identity{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.ig-avatar{
+  width:72px;height:72px;
+  border-radius:20px;
+  background:conic-gradient(from 220deg,#FFB627,#E2402E,#FFB627);
+  display:flex;align-items:center;justify-content:center;
+  flex:none;
+  padding:3px;
+}
+.ig-avatar-inner{
+  width:100%;height:100%;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.ig-avatar-inner img{
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.ig-handle{
+  font-family:'Oswald',sans-serif;
+  font-size:18px;
+  font-weight:600;
+}
+.ig-sub{
+  font-size:13.5px;
+  color:var(--steel-light);
+  margin-top:2px;
+}
+
+/* ===== Location / map ===== */
+.map-section{
+  background:var(--asphalt);
+  color:#fff;
+}
+.map-card{
+  display:block;
+  margin-top:40px;
+  border-radius:var(--radius-m);
+  overflow:hidden;
+  border:1px solid var(--line-dark);
+  background:var(--asphalt-2);
+  position:relative;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.map-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,182,39,0.45);
+  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+}
+.map-canvas{
+  position:relative;
+  aspect-ratio:16/9;
+  max-height:420px;
+  background:#101316;
+}
+@media(max-width:600px){ .map-canvas{aspect-ratio:4/3;} }
+.map-canvas svg{width:100%;height:100%;display:block;}
+
+.map-pin-pulse{
+  transform-origin:center;
+  animation:mapPulse 2.4s ease-out infinite;
+}
+@keyframes mapPulse{
+  0%{transform:scale(0.55);opacity:0.75;}
+  70%{transform:scale(2.1);opacity:0;}
+  100%{transform:scale(2.1);opacity:0;}
+}
+@media(prefers-reduced-motion:reduce){ .map-pin-pulse{animation:none;opacity:0.25;} }
+
+.map-overlay{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:22px 20px;
+  background:linear-gradient(180deg,rgba(16,19,22,0) 0%,rgba(16,19,22,0.92) 70%);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+}
+@media(min-width:768px){ .map-overlay{padding:28px;} }
+.map-address{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(18px,3.2vw,26px);
+  color:#fff;
+  line-height:1.15;
+}
+.map-city{
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--route);
+  margin-bottom:6px;
+}
+.map-open{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:700;
+  color:var(--asphalt);
+  background:var(--route);
+  padding:11px 20px;
+  border-radius:999px;
+  white-space:nowrap;
+  transition:background .18s ease;
+}
+.map-card:hover .map-open{background:#fff;}
+
+/* ===== Final CTA ===== */
+.final-section{
+  background:linear-gradient(180deg,var(--asphalt-2) 0%, var(--asphalt) 100%);
+  color:#fff;
+  text-align:center;
+}
+.final-inner{
+  max-width:600px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.final-inner h2{
+  font-size:clamp(30px,6vw,44px);
+  margin-bottom:14px;
+}
+.final-inner .section-sub{max-width:none; margin:0 auto 36px;}
+.final-meta{
+  margin-top:40px;
+  padding-top:28px;
+  border-top:1px solid var(--line-dark);
+  font-size:14px;
+  color:var(--steel-light);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.final-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--asphalt);
+  color:var(--steel-light);
+  padding:40px 0 100px;
+  font-size:13.5px;
+  border-top:1px solid var(--line-dark);
+}
+@media(min-width:768px){ footer{padding-bottom:40px;} }
+.footer-inner{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+@media(min-width:768px){
+  .footer-inner{flex-direction:row;justify-content:space-between;align-items:flex-start;}
+}
+.footer-brand{
+  font-family:'Oswald',sans-serif;
+  font-size:17px;
+  color:#fff;
+  margin-bottom:8px;
+}
+.footer-links{display:flex;gap:20px;}
+.footer-links a:hover{color:var(--route);}
+.footer-copy{margin-top:18px;color:var(--steel);}
+@media(min-width:768px){ .footer-copy{margin-top:0;} }
+
+/* ===== Sticky mobile CTA ===== */
+.sticky-cta{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:90;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(20,23,26,0.95);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--line-dark);
+  transform:translateY(120%);
+  transition:transform .3s ease;
+}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-cta .btn{width:100%;padding:15px;font-size:15px;}
+@media(min-width:920px){ .sticky-cta{display:none;} }
+
+/* Reveal on scroll */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important;}
+  html{scroll-behavior:auto;}
+}
+
+.wa-icon{width:16px;height:16px;flex:none;}
+
+.reg-page{position:fixed;inset:0;z-index:300;background:var(--concrete);overflow-y:auto;display:none;padding:calc(env(safe-area-inset-top,0px) + 20px) 20px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.reg-page.open{display:block}
+.reg-card{max-width:460px;margin:24px auto;background:var(--paper);border-radius:var(--radius-m);padding:28px 22px;border:1px solid var(--line)}
+.reg-back{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:10px 18px;margin-bottom:12px}
+.reg-back:hover{border-color:var(--route)}
+.reg-back-bottom{display:flex;justify-content:center;margin:18px 0 0}
+.reg-card h2{font-size:30px;margin-bottom:8px}
+.reg-card p.reg-sub{color:var(--steel);font-size:15px;line-height:1.5;margin-bottom:20px}
+.reg-card label{display:block;font-weight:700;font-size:13px;margin:14px 0 6px}
+.reg-card input,.reg-card select{width:100%;padding:14px;border-radius:var(--radius-s);border:1.5px solid var(--line);font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.reg-card input:focus,.reg-card select:focus{outline:none;border-color:var(--route)}
+.reg-card .btn{margin-top:22px}
+.reg-msg{margin-top:14px;font-size:14px;font-weight:600;color:var(--steel);line-height:1.45}
+.reg-msg.err{color:var(--signal)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <span class="logo-mark">S</span>
+      Senim
+    </div>
+    <nav class="nav-links">
+      <a href="#advantages" data-i18n="nav.advantages">Артықшылықтар</a>
+      <a href="#price" data-i18n="nav.price">Бағасы</a>
+      <a href="#process" data-i18n="nav.process">Оқу барысы</a>
+      <a href="#trust" data-i18n="nav.trust">Неге біз</a>
+      <a href="#instagram" data-i18n="nav.instagram">Instagram</a>
+    </nav>
+    <div class="header-right">
+      <a class="header-phone" href="tel:+77018848001">+7 701 884 8001</a>
+      <div class="lang-toggle">
+        <button type="button" data-lang="kk" class="active">ҚАЗ</button>
+        <button type="button" data-lang="ru">РУС</button>
+      </div>
+      <a href="#register" class="btn btn-primary header-cta js-reg" data-i18n="nav.cta">Жазылу</a>
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#advantages" data-i18n="nav.advantages">Артықшылықтар</a>
+    <a href="#price" data-i18n="nav.price">Бағасы</a>
+    <a href="#process" data-i18n="nav.process">Оқу барысы</a>
+    <a href="#trust" data-i18n="nav.trust">Неге біз</a>
+    <a href="#instagram" data-i18n="nav.instagram">Instagram</a>
+    <a href="#register" class="btn btn-primary btn-block js-reg"><svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.99-1.65a11.9 11.9 0 0 0 4.03.7h.01c6.62 0 12.02-5.4 12.02-12.03C28.05 8.4 22.65 3 16.02 3zm0 21.9c-1.3 0-2.58-.34-3.7-.98l-.27-.16-4.74.98.98-4.62-.18-.28a9.9 9.9 0 0 1-1.53-5.3c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.16 1.04 7.04 2.92a9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.35-9.46 9.35zm5.44-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.48 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg><span data-i18n="nav.cta">Жазылу</span></a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero on-dark">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="hero-badge"><span class="dot"></span><span data-i18n="hero.badge">Теория + практика бір жерде</span></span>
+        <h1 data-i18n="hero.headline">Права алудың 70&nbsp;000 ₸-ге баста!</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Бәрін бір жерден алып, теория мен практиканы қатар меңгеріңіз!</p>
+
+        <div class="hero-price-row">
+          <div>
+            <div class="hero-price-label" data-i18n="hero.price.label">Оқу құны</div>
+            <div class="hero-price-value">70&nbsp;000 ₸</div>
+          </div>
+          <p class="hero-price-detail" data-i18n="hero.price.detail">14 күн теория + 5 жүргізу сабағы + емтиханға дайындық</p>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary js-wa" data-wa-key="hero">
+            <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.99-1.65a11.9 11.9 0 0 0 4.03.7h.01c6.62 0 12.02-5.4 12.02-12.03C28.05 8.4 22.65 3 16.02 3zm0 21.9c-1.3 0-2.58-.34-3.7-.98l-.27-.16-4.74.98.98-4.62-.18-.28a9.9 9.9 0 0 1-1.53-5.3c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.16 1.04 7.04 2.92a9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.35-9.46 9.35zm5.44-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.48 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+            <span data-i18n="hero.cta.wa">WhatsApp-та білу</span>
+          </a>
+          <a href="#leave" class="btn btn-ghost js-leave" data-i18n="leave.btn">Дерек қалдыру</a>
+        </div>
+      </div>
+
+      <div class="hero-scene">
+        <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1D2126"/>
+              <stop offset="1" stop-color="#14171A"/>
+            </linearGradient>
+            <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2A2F35"/>
+              <stop offset="1" stop-color="#15181C"/>
+            </linearGradient>
+            <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#FFB627" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#FFB627" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="520" height="420" fill="url(#sky)"/>
+
+          <!-- road perspective -->
+          <polygon points="180,60 340,60 470,400 50,400" fill="url(#road)"/>
+          <polygon points="180,60 340,60 470,400 50,400" fill="none" stroke="#2E3339" stroke-width="1"/>
+
+          <!-- dashed center line -->
+          <line id="centerline" x1="260" y1="60" x2="260" y2="400" stroke="#FFB627" stroke-width="5" stroke-dasharray="20 18" stroke-linecap="round"/>
+
+          <!-- car rig: glow + car move together -->
+          <g id="carRig">
+            <!-- headlight glow -->
+            <circle cx="260" cy="330" r="120" fill="url(#glow)"/>
+
+            <!-- simplified car (front view) -->
+            <g transform="translate(260,300)">
+              <rect x="-92" y="-6" width="184" height="70" rx="18" fill="#EDEFF1"/>
+              <rect x="-92" y="-6" width="184" height="70" rx="18" fill="none" stroke="#C7CBCF" stroke-width="1.5"/>
+              <rect x="-70" y="-34" width="140" height="40" rx="14" fill="#DADDE1"/>
+              <rect x="-58" y="-28" width="52" height="26" rx="6" fill="#14171A" opacity="0.85"/>
+              <rect x="6" y="-28" width="52" height="26" rx="6" fill="#14171A" opacity="0.85"/>
+              <circle cx="-64" cy="18" r="16" fill="#FFB627"/>
+              <circle cx="-64" cy="18" r="6" fill="#FFF6E4"/>
+              <circle cx="64" cy="18" r="16" fill="#FFB627"/>
+              <circle cx="64" cy="18" r="6" fill="#FFF6E4"/>
+              <rect x="-98" y="36" width="26" height="20" rx="4" fill="#0E1013"/>
+              <rect x="72" y="36" width="26" height="20" rx="4" fill="#0E1013"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ADVANTAGES ===== -->
+  <section id="advantages" class="section-pad">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="advantages.eyebrow">Не үйренесіз</span>
+      <h2 class="section-title" data-i18n="advantages.title">Құқық алу үшін қажеттінің бәрі</h2>
+
+      <div class="adv-grid">
+        <div class="adv-card reveal">
+          <span class="adv-icon">📚</span>
+          <div class="adv-title" data-i18n="adv.1.title">14 күн теория</div>
+          <div class="adv-text" data-i18n="adv.1.text">Жол қозғалысы ережелерін түсінікті түрде меңгересіз.</div>
+        </div>
+        <div class="adv-card reveal">
+          <span class="adv-icon">📝</span>
+          <div class="adv-title" data-i18n="adv.2.title">ЖҚЕ бойынша онлайн-тесттер</div>
+          <div class="adv-text" data-i18n="adv.2.text">Емтиханның алдында ыңғайлы форматта жаттығасыз.</div>
+        </div>
+        <div class="adv-card reveal">
+          <span class="adv-icon">🚗</span>
+          <div class="adv-title" data-i18n="adv.3.title">5 жүргізу сабағы</div>
+          <div class="adv-text" data-i18n="adv.3.text">Нұсқаушымен бірге практикалық сабақтар.</div>
+        </div>
+        <div class="adv-card reveal">
+          <span class="adv-icon">🅿️</span>
+          <div class="adv-title" data-i18n="adv.4.title">Автодром</div>
+          <div class="adv-text" data-i18n="adv.4.text">Қажетті дағдыларды жаттықтырасыз.</div>
+        </div>
+        <div class="adv-card reveal">
+          <span class="adv-icon">🏙️</span>
+          <div class="adv-title" data-i18n="adv.5.title">Қала бойынша жүргізу</div>
+          <div class="adv-text" data-i18n="adv.5.text">Қала жолдарында нақты тәжірибе аласыз.</div>
+        </div>
+        <div class="adv-card reveal">
+          <span class="adv-icon">🎯</span>
+          <div class="adv-title" data-i18n="adv.6.title">Емтиханға дайындық</div>
+          <div class="adv-text" data-i18n="adv.6.text">Теориялық және практикалық бөлімге дайындаласыз.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICE ===== -->
+  <section id="price" class="section-pad price-section on-dark">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="price.eyebrow">Оқу құны</span>
+      <h2 class="section-title" data-i18n="price.title">Толық оқу — 70 000 ₸</h2>
+      <p class="section-sub" data-i18n="price.sub">Барлық қажетті кезең бір бағаға кіреді</p>
+
+      <div class="price-card reveal">
+        <div>
+          <div class="price-big">70&nbsp;000 ₸</div>
+          <div class="price-tag-sub" data-i18n="price.tag.sub">Бір реттік төлем, жасырын қосымша ақысыз</div>
+          <ul class="price-list">
+            <li><span class="price-check">✓</span><span data-i18n="price.item.1">Сертификат</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.2">14 күн теория</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.3">ЖҚЕ бойынша онлайн-тесттер</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.4">5 жүргізу сабағы</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.5">Автодром</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.6">Қала бойынша жүргізу</span></li>
+            <li><span class="price-check">✓</span><span data-i18n="price.item.7">Емтиханға дайындық</span></li>
+          </ul>
+        </div>
+        <div class="price-cta-col">
+          <a href="#register" class="btn btn-primary js-reg"><svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.99-1.65a11.9 11.9 0 0 0 4.03.7h.01c6.62 0 12.02-5.4 12.02-12.03C28.05 8.4 22.65 3 16.02 3zm0 21.9c-1.3 0-2.58-.34-3.7-.98l-.27-.16-4.74.98.98-4.62-.18-.28a9.9 9.9 0 0 1-1.53-5.3c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.16 1.04 7.04 2.92a9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.35-9.46 9.35zm5.44-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.48 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg><span data-i18n="price.cta">70 000 ₸-ге жазылу</span></a>
+          <a href="https://www.instagram.com/senim_avtoshkola_shym/" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="hero.cta.secondary">Толығырақ білу</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section id="process" class="section-pad process-section">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="process.eyebrow">Оқу барысы</span>
+      <h2 class="section-title" data-i18n="process.title">Senim-мен құқықты қалай аласың?</h2>
+
+      <div class="timeline">
+        <div class="timeline-line"></div>
+
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title" data-i18n="step.1.title">Жазылу</div>
+            <p class="step-text" data-i18n="step.1.text">WhatsApp арқылы өтінім қалдырасыз.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title" data-i18n="step.2.title">Теория</div>
+            <p class="step-text" data-i18n="step.2.text">14 күн бойы жол қозғалысы ережелерін оқимыз.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title" data-i18n="step.3.title">Тестілеу</div>
+            <p class="step-text" data-i18n="step.3.text">Білімді онлайн-тесттермен бекітеміз.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-title" data-i18n="step.4.title">Практика</div>
+            <p class="step-text" data-i18n="step.4.text">Автодромда және қала жолдарында жаттығамыз.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <div class="step-title" data-i18n="step.5.title">Емтиханға дайындық</div>
+            <p class="step-text" data-i18n="step.5.text">Емтихан тапсыруға толық дайындаламыз.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST ===== -->
+  <section id="trust" class="section-pad trust-section">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="trust.eyebrow">Сенім</span>
+      <h2 class="section-title" data-i18n="trust.title">Неге Senim?</h2>
+
+      <div class="trust-grid">
+        <ul class="trust-list reveal">
+          <li><span class="mark"></span><span data-i18n="trust.1">Теория мен практика бір жерде</span></li>
+          <li><span class="mark"></span><span data-i18n="trust.2">Түсінікті оқыту</span></li>
+          <li><span class="mark"></span><span data-i18n="trust.3">Практикалық сабақтар</span></li>
+          <li><span class="mark"></span><span data-i18n="trust.4">Емтиханға дайындық</span></li>
+          <li><span class="mark"></span><span data-i18n="trust.5">WhatsApp арқылы ыңғайлы жазылу</span></li>
+          <li><span class="mark"></span><span data-i18n="trust.6">Шымкентте оқыту</span></li>
+        </ul>
+
+        <div class="review-card reveal">
+          <div class="quote-mark">"</div>
+          <h3 data-i18n="trust.reviews.title">Пікірлер жақында қосылады</h3>
+          <p data-i18n="trust.reviews.text">Алғашқы түлектеріміздің пікірлерін осы жерде жариялаймыз.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSTAGRAM ===== -->
+  <section id="instagram" class="section-pad ig-section on-dark">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="instagram.eyebrow">Instagram</span>
+      <h2 class="section-title" data-i18n="instagram.title">Біз Instagram-дамыз</h2>
+
+      <div class="ig-card reveal">
+        <div class="ig-identity">
+          <div class="ig-avatar"><div class="ig-avatar-inner"><img src="data:image/jpeg;base64,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" alt="Senim — автомектеп / автошкола" width="150" height="150" loading="lazy"></div></div>
+          <div>
+            <div class="ig-handle">@senim_avtoshkola_shym</div>
+            <div class="ig-sub" data-i18n="ig.follow">Senim | Автошкола Шымкент</div>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/senim_avtoshkola_shym/" target="_blank" rel="noopener" class="btn btn-primary">
+          <span data-i18n="instagram.cta">Instagram-ға өту</span> →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="section-pad final-section on-dark">
+    <div class="wrap final-inner">
+      <h2 data-i18n="final.title">Оқуға дайынсыз ба?</h2>
+      <p class="section-sub" data-i18n="final.sub">Құқыққа алғашқы қадам — небәрі 70 000 ₸</p>
+
+      <div class="final-ctas" style="margin-top:8px;">
+        <a href="#register" class="btn btn-primary js-reg">
+          <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.99-1.65a11.9 11.9 0 0 0 4.03.7h.01c6.62 0 12.02-5.4 12.02-12.03C28.05 8.4 22.65 3 16.02 3zm0 21.9c-1.3 0-2.58-.34-3.7-.98l-.27-.16-4.74.98.98-4.62-.18-.28a9.9 9.9 0 0 1-1.53-5.3c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.16 1.04 7.04 2.92a9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.35-9.46 9.35zm5.44-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.48 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+          <span data-i18n="final.cta.wa">WhatsApp-қа жазылу</span> →
+        </a>
+        <a href="https://www.instagram.com/senim_avtoshkola_shym/" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="final.cta.ig">Instagram-ды көру</a>
+      </div>
+
+      <div class="final-meta">
+        <span>Senim | Автошкола Шымкент</span>
+        <a href="tel:+77018848001">📲 +7 701 884 8001</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Location / map -->
+  <section class="map-section section-pad on-dark" id="location">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="location.eyebrow">Мекенжай</span>
+      <h2 class="section-title" data-i18n="location.title">Бізді қайдан табасыз?</h2>
+      <p class="section-sub" data-i18n="location.sub">Картаны басыңыз — навигатор ашылады.</p>
+
+      <a class="map-card" href="https://www.google.com/maps/search/?api=1&query=%D0%90%D1%80%D0%B3%D1%8B%D0%BD%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0%20249/1%2C%20%D0%A8%D1%8B%D0%BC%D0%BA%D0%B5%D0%BD%D1%82" target="_blank" rel="noopener" aria-label="Шымкент, Арғынбекова 249/1 — картадан ашу">
+        <div class="map-canvas">
+          <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="mapFade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#171B1F"/>
+                <stop offset="100%" stop-color="#101316"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="800" height="450" fill="url(#mapFade)"/>
+
+            <!-- city blocks -->
+            <g fill="#1C2126">
+              <rect x="40" y="40" width="180" height="120" rx="6"/>
+              <rect x="250" y="40" width="130" height="120" rx="6"/>
+              <rect x="410" y="40" width="200" height="75" rx="6"/>
+              <rect x="640" y="40" width="130" height="120" rx="6"/>
+              <rect x="40" y="200" width="180" height="90" rx="6"/>
+              <rect x="250" y="200" width="130" height="90" rx="6"/>
+              <rect x="640" y="200" width="130" height="90" rx="6"/>
+              <rect x="40" y="330" width="180" height="90" rx="6"/>
+              <rect x="250" y="330" width="130" height="90" rx="6"/>
+              <rect x="410" y="330" width="200" height="90" rx="6"/>
+              <rect x="640" y="330" width="130" height="90" rx="6"/>
+            </g>
+
+            <!-- park -->
+            <rect x="410" y="155" width="90" height="135" rx="8" fill="#1A2420"/>
+
+            <!-- side streets -->
+            <g stroke="#2A3037" stroke-width="10" stroke-linecap="round">
+              <line x1="232" y1="20" x2="232" y2="430"/>
+              <line x1="394" y1="20" x2="394" y2="430"/>
+              <line x1="624" y1="20" x2="624" y2="430"/>
+              <line x1="20" y1="180" x2="780" y2="180"/>
+              <line x1="20" y1="310" x2="780" y2="310"/>
+            </g>
+
+            <!-- main avenue -->
+            <g>
+              <line x1="0" y1="245" x2="800" y2="245" stroke="#343B43" stroke-width="30" stroke-linecap="round"/>
+              <line x1="0" y1="245" x2="800" y2="245" stroke="#FFB627" stroke-width="3" stroke-dasharray="18 16" opacity="0.7"/>
+            </g>
+
+            <!-- pin -->
+            <g transform="translate(500,245)">
+              <circle class="map-pin-pulse" r="26" fill="#FFB627" opacity="0.35"/>
+              <ellipse cx="0" cy="4" rx="16" ry="5" fill="#000" opacity="0.35"/>
+              <path d="M0,-52 C-14,-52 -25,-41 -25,-27 C-25,-11 -6,4 0,4 C6,4 25,-11 25,-27 C25,-41 14,-52 0,-52 Z" fill="#FFB627"/>
+              <circle cx="0" cy="-28" r="9" fill="#14171A"/>
+            </g>
+          </svg>
+
+          <div class="map-overlay">
+            <div>
+              <div class="map-city" data-i18n="location.city">Шымкент</div>
+              <div class="map-address" data-i18n="location.address">Арғынбекова көшесі, 249/1</div>
+            </div>
+            <span class="map-open" data-i18n="location.cta">Картадан ашу →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-brand">Senim | Автошкола Шымкент</div>
+      <div>Шымкент, Казахстан · <a href="tel:+77018848001">+7 701 884 8001</a></div>
+    </div>
+    <div class="footer-links">
+      <a href="#" class="js-wa" data-wa-key="hero">WhatsApp</a>
+      <a href="https://www.instagram.com/senim_avtoshkola_shym/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="wrap footer-copy">
+    © <span id="footYear">2026</span> Senim. <span data-i18n="footer.rights">Барлық құқықтар қорғалған.</span>
+  </div>
+</footer>
+
+
+<div class="reg-page" id="regPage" role="dialog" aria-modal="true">
+  <div class="reg-card">
+    <a href="#" class="reg-back" id="regBack">← <span data-i18n="reg.back">Басты бет</span></a>
+    <h2 id="regTitle"></h2>
+    <p class="reg-sub" id="regSub"></p>
+    <div id="regFields">
+      <label for="regName" data-i18n="reg.name">Аты-жөні</label>
+      <input id="regName" type="text" autocomplete="name" maxlength="80">
+      <label for="regPhone" data-i18n="reg.phone">Телефон</label>
+      <input id="regPhone" type="tel" autocomplete="tel" placeholder="+7 7__ ___ __ __" maxlength="20">
+      <div id="regExtra">
+        <label for="regCat" data-i18n="reg.cat">Санат</label>
+        <select id="regCat"><option>B</option><option>A</option><option>C</option></select>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="regSubmit" data-i18n="reg.submit">Жіберу</button>
+      <div class="reg-msg" id="regStatus" aria-live="polite"></div>
+      <a href="#" class="reg-back reg-back-bottom">← <span data-i18n="reg.back">Басты бет</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-cta" id="stickyCta">
+  <a href="#register" class="btn btn-primary js-reg"><svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.99-1.65a11.9 11.9 0 0 0 4.03.7h.01c6.62 0 12.02-5.4 12.02-12.03C28.05 8.4 22.65 3 16.02 3zm0 21.9c-1.3 0-2.58-.34-3.7-.98l-.27-.16-4.74.98.98-4.62-.18-.28a9.9 9.9 0 0 1-1.53-5.3c0-5.48 4.46-9.94 9.95-9.94 2.66 0 5.16 1.04 7.04 2.92a9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.35-9.46 9.35zm5.44-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.48 1.69.62.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg><span data-i18n="sticky.cta">WhatsApp-қа жазылу</span></a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var PHONE = "77018848001";
+
+  var yearEl = document.getElementById("footYear");
+  if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+
+  var translations = {
+    kk: {
+      "reg.back":"Басты бет","reg.name":"Аты-жөні","reg.phone":"Телефон","reg.cat":"Санат","reg.submit":"Жіберу","leave.btn":"Дерек қалдыру","hero.cta.wa":"WhatsApp-та білу",
+      "reg.title":"Оқуға жазылу","reg.sub":"Деректеріңізді қалдырыңыз — біз сізбен байланысамыз.","leave.title":"Дерек қалдыру","leave.sub":"Атыңыз бен телефоныңызды қалдырыңыз, қоңырау шаламыз.",
+      "reg.err":"Атыңызды және телефон нөміріңізді толтырыңыз.","reg.ok":"Рақмет! Деректер сақталды. WhatsApp ашылады — хабарламаны жіберіңіз.",
+      "nav.advantages":"Артықшылықтар","nav.price":"Бағасы","nav.process":"Оқу барысы",
+      "nav.trust":"Неге біз","nav.instagram":"Instagram","nav.cta":"Жазылу",
+      "hero.badge":"Теория + практика бір жерде",
+      "hero.headline":"Права алудың 70\u00A0000 ₸-ге баста!",
+      "hero.sub":"Бәрін бір жерден алып, теория мен практиканы қатар меңгеріңіз!",
+      "hero.price.label":"Оқу құны",
+      "hero.price.detail":"14 күн теория + 5 жүргізу сабағы + емтиханға дайындық",
+      "hero.cta.primary":"Оқуға жазылу","hero.cta.secondary":"Толығырақ білу",
+      "advantages.eyebrow":"Не үйренесіз","advantages.title":"Құқық алу үшін қажеттінің бәрі",
+      "adv.1.title":"14 күн теория","adv.1.text":"Жол қозғалысы ережелерін түсінікті түрде меңгересіз.",
+      "adv.2.title":"ЖҚЕ бойынша онлайн-тесттер","adv.2.text":"Емтиханның алдында ыңғайлы форматта жаттығасыз.",
+      "adv.3.title":"5 жүргізу сабағы","adv.3.text":"Нұсқаушымен бірге практикалық сабақтар.",
+      "adv.4.title":"Автодром","adv.4.text":"Қажетті дағдыларды жаттықтырасыз.",
+      "adv.5.title":"Қала бойынша жүргізу","adv.5.text":"Қала жолдарында нақты тәжірибе аласыз.",
+      "adv.6.title":"Емтиханға дайындық","adv.6.text":"Теориялық және практикалық бөлімге дайындаласыз.",
+      "price.eyebrow":"Оқу құны","price.title":"Толық оқу — 70 000 ₸",
+      "price.sub":"Барлық қажетті кезең бір бағаға кіреді",
+      "price.tag.sub":"Бір реттік төлем, жасырын қосымша ақысыз",
+      "price.item.1":"Сертификат","price.item.2":"14 күн теория","price.item.3":"ЖҚЕ бойынша онлайн-тесттер",
+      "price.item.4":"5 жүргізу сабағы","price.item.5":"Автодром","price.item.6":"Қала бойынша жүргізу",
+      "price.item.7":"Емтиханға дайындық","price.cta":"70 000 ₸-ге жазылу",
+      "process.eyebrow":"Оқу барысы","process.title":"Senim-мен құқықты қалай аласың?",
+      "step.1.title":"Жазылу","step.1.text":"WhatsApp арқылы өтінім қалдырасыз.",
+      "step.2.title":"Теория","step.2.text":"14 күн бойы жол қозғалысы ережелерін оқимыз.",
+      "step.3.title":"Тестілеу","step.3.text":"Білімді онлайн-тесттермен бекітеміз.",
+      "step.4.title":"Практика","step.4.text":"Автодромда және қала жолдарында жаттығамыз.",
+      "step.5.title":"Емтиханға дайындық","step.5.text":"Емтихан тапсыруға толық дайындаламыз.",
+      "trust.eyebrow":"Сенім","trust.title":"Неге Senim?",
+      "trust.1":"Теория мен практика бір жерде","trust.2":"Түсінікті оқыту","trust.3":"Практикалық сабақтар",
+      "trust.4":"Емтиханға дайындық","trust.5":"WhatsApp арқылы ыңғайлы жазылу","trust.6":"Шымкентте оқыту",
+      "trust.reviews.title":"Пікірлер жақында қосылады",
+      "trust.reviews.text":"Алғашқы түлектеріміздің пікірлерін осы жерде жариялаймыз.",
+      "instagram.eyebrow":"Instagram","instagram.title":"Біз Instagram-дамыз",
+      "instagram.cta":"Instagram-ға өту","ig.follow":"Senim | Автошкола Шымкент",
+      "final.title":"Оқуға дайынсыз ба?","final.sub":"Құқыққа алғашқы қадам — небәрі 70 000 ₸",
+      "final.cta.wa":"WhatsApp-қа жазылу","final.cta.ig":"Instagram-ды көру",
+      "location.eyebrow":"Мекенжай","location.title":"Бізді қайдан табасыз?","location.sub":"Картаны басыңыз — навигатор ашылады.","location.city":"Шымкент қаласы","location.address":"Арғынбекова көшесі, 249/1","location.cta":"Картадан ашу →",
+      "footer.rights":"Барлық құқықтар қорғалған.","sticky.cta":"WhatsApp-қа жазылу"
+    },
+    ru: {
+      "reg.back":"На главную","reg.name":"Имя","reg.phone":"Телефон","reg.cat":"Категория","reg.submit":"Отправить","leave.btn":"Оставить данные","hero.cta.wa":"Узнать в WhatsApp",
+      "reg.title":"Запись на обучение","reg.sub":"Оставьте данные — мы свяжемся с вами.","leave.title":"Оставить данные","leave.sub":"Оставьте имя и телефон, мы вам перезвоним.",
+      "reg.err":"Заполните имя и номер телефона.","reg.ok":"Спасибо! Данные сохранены. Откроется WhatsApp — отправьте сообщение.",
+      "nav.advantages":"Преимущества","nav.price":"Цена","nav.process":"Обучение",
+      "nav.trust":"Почему мы","nav.instagram":"Instagram","nav.cta":"Записаться",
+      "hero.badge":"Теория и практика в одном месте",
+      "hero.headline":"Получи права всего за 70\u00A0000 ₸!",
+      "hero.sub":"Изучай теорию и практику в одном месте!",
+      "hero.price.label":"Стоимость обучения",
+      "hero.price.detail":"14 дней теории + 5 занятий по вождению + подготовка к экзамену",
+      "hero.cta.primary":"Записаться на обучение","hero.cta.secondary":"Узнать подробнее",
+      "advantages.eyebrow":"Чему вы научитесь","advantages.title":"Всё необходимое для получения прав",
+      "adv.1.title":"14 дней теории","adv.1.text":"Изучение ПДД с понятным объяснением материала.",
+      "adv.2.title":"Онлайн-тесты ПДД","adv.2.text":"Тренируйтесь перед экзаменом в удобном формате.",
+      "adv.3.title":"5 занятий по вождению","adv.3.text":"Практика с инструктором.",
+      "adv.4.title":"Автодром","adv.4.text":"Отработка необходимых навыков.",
+      "adv.5.title":"Вождение по городу","adv.5.text":"Получение реального опыта на городских дорогах.",
+      "adv.6.title":"Подготовка к экзамену","adv.6.text":"Подготовка к теоретической и практической части.",
+      "price.eyebrow":"Стоимость","price.title":"Полное обучение — 70 000 ₸",
+      "price.sub":"Все необходимые этапы включены в одну цену",
+      "price.tag.sub":"Разовый платёж, без скрытых доплат",
+      "price.item.1":"Сертификат","price.item.2":"14 дней теории","price.item.3":"Онлайн-тесты ПДД",
+      "price.item.4":"5 занятий по вождению","price.item.5":"Автодром","price.item.6":"Вождение по городу",
+      "price.item.7":"Подготовка к экзамену","price.cta":"Записаться за 70 000 ₸",
+      "process.eyebrow":"Как проходит обучение","process.title":"Как получить права с Senim?",
+      "step.1.title":"Запись","step.1.text":"Оставляете заявку через WhatsApp.",
+      "step.2.title":"Теория","step.2.text":"14 дней изучаем правила дорожного движения.",
+      "step.3.title":"Тестирование","step.3.text":"Закрепляем знания с помощью онлайн-тестов.",
+      "step.4.title":"Практика","step.4.text":"Занимаемся на автодроме и в городе.",
+      "step.5.title":"Подготовка к экзамену","step.5.text":"Готовимся к сдаче экзамена.",
+      "trust.eyebrow":"Доверие","trust.title":"Почему Senim?",
+      "trust.1":"Теория и практика в одном месте","trust.2":"Понятное обучение","trust.3":"Практические занятия",
+      "trust.4":"Подготовка к экзамену","trust.5":"Удобная запись через WhatsApp","trust.6":"Обучение в Шымкенте",
+      "trust.reviews.title":"Отзывы скоро появятся",
+      "trust.reviews.text":"Здесь мы опубликуем отзывы первых выпускников.",
+      "instagram.eyebrow":"Instagram","instagram.title":"Мы в Instagram",
+      "instagram.cta":"Перейти в Instagram","ig.follow":"Senim | Автошкола Шымкент",
+      "final.title":"Готовы начать обучение?","final.sub":"Первый шаг к правам — всего 70 000 ₸",
+      "final.cta.wa":"Записаться в WhatsApp","final.cta.ig":"Смотреть Instagram",
+      "location.eyebrow":"Адрес","location.title":"Где нас найти?","location.sub":"Нажмите на карту — откроется навигатор.","location.city":"г. Шымкент","location.address":"улица Аргынбекова, 249/1","location.cta":"Открыть на карте →",
+      "footer.rights":"Все права защищены.","sticky.cta":"Записаться в WhatsApp"
+    }
+  };
+
+  var waMessages = {
+    kk: {
+      hero:"Сәлеметсіз бе! Senim автомектебі туралы толығырақ білгім келеді.",
+      price:"Сәлеметсіз бе! Senim автомектебіне жазылғым келеді. 70 000 ₸-ге оқу туралы толығырақ айтып берсеңіз.",
+      final:"Сәлеметсіз бе! Senim автомектебіне жазылғым келеді."
+    },
+    ru: {
+      hero:"Здравствуйте! Хочу узнать подробнее об автошколе Senim.",
+      price:"Здравствуйте! Хочу записаться в автошколу Senim. Расскажите, пожалуйста, подробнее об обучении за 70 000 ₸.",
+      final:"Здравствуйте! Хочу записаться в автошколу Senim."
+    }
+  };
+
+  var currentLang = localStorage.getItem("senim_lang") || "kk";
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem("senim_lang", lang);
+
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var key = el.getAttribute("data-i18n");
+      var dict = translations[lang];
+      if(dict && dict[key] !== undefined){ el.textContent = dict[key]; }
+    });
+
+    document.querySelectorAll(".lang-toggle button").forEach(function(btn){
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    });
+
+    updateWaLinks();
+  }
+
+  function updateWaLinks(){
+    document.querySelectorAll(".js-wa").forEach(function(el){
+      var key = el.getAttribute("data-wa-key") || "hero";
+      var msg = (waMessages[currentLang] && waMessages[currentLang][key]) || waMessages.kk.hero;
+      el.setAttribute("href", "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg));
+    });
+  }
+
+  document.querySelectorAll(".lang-toggle button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      applyLang(btn.getAttribute("data-lang"));
+    });
+  });
+
+  applyLang(currentLang);
+
+  // Mobile nav toggle
+  var burger = document.getElementById("navBurger");
+  var mobileNav = document.getElementById("mobileNav");
+  if(burger && mobileNav){
+    var setNavOpen = function(open){
+      burger.classList.toggle("is-open", open);
+      mobileNav.classList.toggle("is-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    burger.addEventListener("click", function(){
+      setNavOpen(!mobileNav.classList.contains("is-open"));
+    });
+    mobileNav.querySelectorAll("a").forEach(function(link){
+      link.addEventListener("click", function(){ setNavOpen(false); });
+    });
+  }
+
+  // Sticky mobile CTA: show after scrolling past hero
+  var sticky = document.getElementById("stickyCta");
+  var heroEl = document.querySelector(".hero");
+  if(sticky && heroEl){
+    var toggleSticky = function(){
+      var heroBottom = heroEl.getBoundingClientRect().bottom;
+      sticky.classList.toggle("show", heroBottom < 0);
+    };
+    window.addEventListener("scroll", toggleSticky, {passive:true});
+    toggleSticky();
+  }
+
+  // Reveal on scroll
+  var revealEls = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window && revealEls.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:"0px 0px -40px 0px"});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  // Hero centerline dash draw-in (single orchestrated moment)
+  var centerline = document.getElementById("centerline");
+  if(centerline){
+    var totalLen = 340;
+    centerline.style.strokeDasharray = totalLen;
+    centerline.style.strokeDashoffset = totalLen;
+    centerline.style.transition = "stroke-dashoffset 1.1s cubic-bezier(.22,.9,.32,1) .3s";
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        centerline.style.strokeDashoffset = "0";
+        setTimeout(function(){
+          centerline.removeAttribute("style");
+          centerline.setAttribute("stroke-dasharray","20 18");
+        }, 1500);
+      });
+    });
+  }
+
+  // Car steers toward the cursor (desktop) or with phone tilt (mobile)
+  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var carRig = document.getElementById("carRig");
+  var heroScene = document.querySelector(".hero-scene");
+
+  if(carRig && heroScene && !prefersReducedMotion){
+    var maxShift = 42;   // px, how far the car can drift sideways
+    var maxRotate = 5;   // deg, slight steering lean
+    var targetRatio = 0; // -1 (left) .. 1 (right)
+    var currentX = 0, currentRot = 0;
+
+    function setTargetRatio(ratio){
+      targetRatio = Math.max(-1, Math.min(1, ratio));
+    }
+
+    function tick(){
+      var goalX = targetRatio * maxShift;
+      var goalRot = targetRatio * maxRotate;
+      currentX += (goalX - currentX) * 0.07;
+      currentRot += (goalRot - currentRot) * 0.07;
+      carRig.setAttribute("transform", "translate(" + currentX.toFixed(2) + ",0) rotate(" + currentRot.toFixed(2) + " 260 330)");
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // Desktop: mouse position steers the car
+    heroScene.addEventListener("mousemove", function(e){
+      var rect = heroScene.getBoundingClientRect();
+      var relX = (e.clientX - rect.left) / rect.width;
+      setTargetRatio((relX - 0.5) * 2);
+    });
+    heroScene.addEventListener("mouseleave", function(){ setTargetRatio(0); });
+
+    // Mobile: device tilt (gamma = left/right lean) steers the car
+    var tiltActive = false;
+    function handleOrientation(e){
+      if(e.gamma === null || e.gamma === undefined) return;
+      var g = Math.max(-24, Math.min(24, e.gamma));
+      setTargetRatio(g / 24);
+    }
+    function enableTilt(){
+      if(tiltActive) return;
+      tiltActive = true;
+      if(typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function"){
+        DeviceOrientationEvent.requestPermission().then(function(state){
+          if(state === "granted"){ window.addEventListener("deviceorientation", handleOrientation); }
+        }).catch(function(){});
+      } else if(typeof DeviceOrientationEvent !== "undefined"){
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
+    }
+    // iOS requires a user gesture to grant motion-sensor permission,
+    // so we quietly ask on the first tap anywhere on the page.
+    window.addEventListener("touchstart", enableTilt, {once:true, passive:true});
+    window.addEventListener("click", enableTilt, {once:true});
+  }
+
+  // ===== Registration / leave-details page =====
+  var regPage=document.getElementById("regPage"), regMode="register";
+  function T(k){ return (translations[currentLang]||{})[k]||""; }
+  function openReg(mode){
+    regMode=mode;
+    document.getElementById("regTitle").textContent=T(mode==="leave"?"leave.title":"reg.title");
+    document.getElementById("regSub").textContent=T(mode==="leave"?"leave.sub":"reg.sub");
+    document.getElementById("regExtra").style.display=(mode==="leave")?"none":"block";
+    document.getElementById("regStatus").textContent="";
+    document.getElementById("regStatus").className="reg-msg";
+    regPage.classList.add("open"); regPage.scrollTop=0;
+    document.body.style.overflow="hidden";
+    if(mobileNav){ mobileNav.classList.remove("is-open"); }
+  }
+  function closeReg(){ regPage.classList.remove("open"); document.body.style.overflow=""; }
+  document.querySelectorAll(".js-reg").forEach(function(el){
+    el.addEventListener("click",function(e){ e.preventDefault(); openReg("register"); });
+  });
+  document.querySelectorAll(".js-leave").forEach(function(el){
+    el.addEventListener("click",function(e){ e.preventDefault(); openReg("leave"); });
+  });
+  document.querySelectorAll(".reg-back").forEach(function(b){ b.addEventListener("click",function(e){ e.preventDefault(); closeReg(); }); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeReg(); });
+  if(location.hash==="#register") openReg("register");
+  if(location.hash==="#leave") openReg("leave");
+
+  document.getElementById("regSubmit").addEventListener("click",function(){
+    var name=document.getElementById("regName").value.trim();
+    var phone=document.getElementById("regPhone").value.trim();
+    var cat=document.getElementById("regCat").value;
+    var st=document.getElementById("regStatus");
+    if(name.length<2 || phone.replace(/\D/g,"").length<10){ st.className="reg-msg err"; st.textContent=T("reg.err"); return; }
+    var lead={type:regMode,name:name,phone:phone,category:regMode==="register"?cat:"",lang:currentLang,at:new Date().toISOString()};
+    // 1) local copy in this browser
+    try{ var all=JSON.parse(localStorage.getItem("senim_leads")||"[]"); all.push(lead); localStorage.setItem("senim_leads",JSON.stringify(all)); }catch(e){}
+    // 2) deliver to the school via WhatsApp with the details filled in
+    var text=(currentLang==="ru"
+      ? (regMode==="leave"?"Заявка с сайта (оставить данные)":"Заявка на обучение")+"\nИмя: "+name+"\nТелефон: "+phone+(lead.category?"\nКатегория: "+lead.category:"")
+      : (regMode==="leave"?"Сайттан өтінім (дерек қалдыру)":"Оқуға жазылу өтінімі")+"\nАты-жөні: "+name+"\nТелефон: "+phone+(lead.category?"\nСанат: "+lead.category:""));
+    st.className="reg-msg"; st.textContent=T("reg.ok");
+    document.getElementById("regName").value=""; document.getElementById("regPhone").value="";
+    setTimeout(function(){ window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(text),"_blank","noopener"); },700);
+  });
+})();
+</script>
+
+</body>
+</html>
