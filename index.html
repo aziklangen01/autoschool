@@ -1207,6 +1207,10 @@ footer{
 
   var PHONE = "77018848001";
 
+  // ===== Telegram: заявки приходят прямо в ваш Telegram =====
+  var TG_BOT_TOKEN = "8803202164:AAHEIBbl57Sf3F6EUnGoErffUGJ3lo_9h50";   // от @BotFather
+  var TG_CHAT_ID   = "7962832734";      // ваш chat id (от @userinfobot)
+
   var yearEl = document.getElementById("footYear");
   if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
@@ -1214,7 +1218,7 @@ footer{
     kk: {
       "reg.back":"Басты бет","reg.name":"Аты-жөні","reg.phone":"Телефон","reg.cat":"Санат","reg.submit":"Жіберу","leave.btn":"Дерек қалдыру","hero.cta.wa":"WhatsApp-та білу",
       "reg.title":"Оқуға жазылу","reg.sub":"Деректеріңізді қалдырыңыз — біз сізбен байланысамыз.","leave.title":"Дерек қалдыру","leave.sub":"Атыңыз бен телефоныңызды қалдырыңыз, қоңырау шаламыз.",
-      "reg.err":"Атыңызды және телефон нөміріңізді толтырыңыз.","reg.ok":"Рақмет! Деректер сақталды. WhatsApp ашылады — хабарламаны жіберіңіз.",
+      "reg.err":"Атыңызды және телефон нөміріңізді толтырыңыз.","reg.ok":"Рақмет! Өтініміңіз қабылданды. Жақын арада сізге хабарласамыз — қоңырауды күтіңіз.","reg.sending":"Жіберілуде...","reg.fail":"Жіберу мүмкін болмады. Қайталап көріңіз немесе +7 701 884 8001 нөміріне қоңырау шалыңыз.",
       "nav.advantages":"Артықшылықтар","nav.price":"Бағасы","nav.process":"Оқу барысы",
       "nav.trust":"Неге біз","nav.instagram":"Instagram","nav.cta":"Жазылу",
       "hero.badge":"Теория + практика бір жерде",
@@ -1257,7 +1261,7 @@ footer{
     ru: {
       "reg.back":"На главную","reg.name":"Имя","reg.phone":"Телефон","reg.cat":"Категория","reg.submit":"Отправить","leave.btn":"Оставить данные","hero.cta.wa":"Узнать в WhatsApp",
       "reg.title":"Запись на обучение","reg.sub":"Оставьте данные — мы свяжемся с вами.","leave.title":"Оставить данные","leave.sub":"Оставьте имя и телефон, мы вам перезвоним.",
-      "reg.err":"Заполните имя и номер телефона.","reg.ok":"Спасибо! Данные сохранены. Откроется WhatsApp — отправьте сообщение.",
+      "reg.err":"Заполните имя и номер телефона.","reg.ok":"Спасибо! Заявка принята. Ожидайте звонка — мы скоро свяжемся с вами.","reg.sending":"Отправка...","reg.fail":"Не удалось отправить. Попробуйте ещё раз или позвоните: +7 701 884 8001.",
       "nav.advantages":"Преимущества","nav.price":"Цена","nav.process":"Обучение",
       "nav.trust":"Почему мы","nav.instagram":"Instagram","nav.cta":"Записаться",
       "hero.badge":"Теория и практика в одном месте",
@@ -1503,13 +1507,24 @@ footer{
     var lead={type:regMode,name:name,phone:phone,category:regMode==="register"?cat:"",lang:currentLang,at:new Date().toISOString()};
     // 1) local copy in this browser
     try{ var all=JSON.parse(localStorage.getItem("senim_leads")||"[]"); all.push(lead); localStorage.setItem("senim_leads",JSON.stringify(all)); }catch(e){}
-    // 2) deliver to the school via WhatsApp with the details filled in
-    var text=(currentLang==="ru"
-      ? (regMode==="leave"?"Заявка с сайта (оставить данные)":"Заявка на обучение")+"\nИмя: "+name+"\nТелефон: "+phone+(lead.category?"\nКатегория: "+lead.category:"")
-      : (regMode==="leave"?"Сайттан өтінім (дерек қалдыру)":"Оқуға жазылу өтінімі")+"\nАты-жөні: "+name+"\nТелефон: "+phone+(lead.category?"\nСанат: "+lead.category:""));
-    st.className="reg-msg"; st.textContent=T("reg.ok");
-    document.getElementById("regName").value=""; document.getElementById("regPhone").value="";
-    setTimeout(function(){ window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(text),"_blank","noopener"); },700);
+    // 2) отправка в Telegram
+    var typeTxt=(regMode==="leave")?"Оставили данные":"Заявка на обучение";
+    var msg="🚗 Новая заявка с сайта\n"+typeTxt+"\n\n👤 Имя: "+name+"\n📞 Телефон: "+phone+(lead.category?"\n🪪 Категория: "+lead.category:"")+"\n🌐 Язык: "+(currentLang==="ru"?"RU":"KK");
+    var btn=document.getElementById("regSubmit");
+    btn.disabled=true; st.className="reg-msg"; st.textContent=T("reg.sending");
+    fetch("https://api.telegram.org/bot"+TG_BOT_TOKEN+"/sendMessage",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({chat_id:TG_CHAT_ID,text:msg})
+    }).then(function(r){ return r.json(); }).then(function(d){
+      btn.disabled=false;
+      if(d && d.ok){
+        st.className="reg-msg"; st.textContent=T("reg.ok");
+        document.getElementById("regName").value=""; document.getElementById("regPhone").value="";
+      } else { st.className="reg-msg err"; st.textContent=T("reg.fail"); }
+    }).catch(function(){
+      btn.disabled=false; st.className="reg-msg err"; st.textContent=T("reg.fail");
+    });
   });
 })();
 </script>
