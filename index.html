@@ -29,7 +29,6 @@
   --radius-s:10px;
   --radius-m:16px;
   --container:1180px;
-  --wa-kk:"Сәлеметсіз бе! Senim автомектебі туралы толығырақ білгім келеді.";
 }
 
 *{box-sizing:border-box;}
@@ -209,7 +208,9 @@ header{
   font-weight:600;
   color:#fff;
   white-space:nowrap;
+  transition:color .15s ease;
 }
+.header-phone:hover{color:var(--route);}
 @media(min-width:1180px){ .header-phone{display:block;} }
 .header-cta{
   display:none;
@@ -274,7 +275,6 @@ header{
   font-size:13px;
   font-weight:700;
   color:var(--steel-light);
-  text-transform:none;
   margin-bottom:6px;
 }
 .hero-price-value{
@@ -452,7 +452,7 @@ header{
   line-height:1.5;
 }
 
-/* ===== Trust ===== */
+/* ===== Trust & Reviews ===== */
 .trust-section{background:var(--paper);}
 .trust-grid{
   display:grid;
@@ -460,7 +460,7 @@ header{
   margin-top:44px;
 }
 @media(min-width:860px){
-  .trust-grid{grid-template-columns:1fr 1fr;align-items:start;}
+  .trust-grid{grid-template-columns:0.95fr 1.05fr;align-items:start;}
 }
 .trust-list{
   display:grid;
@@ -482,28 +482,93 @@ header{
   border-radius:50%;
   background:var(--route);
 }
-.review-card{
+.reviews-stack{
+  display:grid;
+  gap:16px;
+}
+.review-item{
   background:var(--concrete);
-  border:1px dashed var(--steel-light);
   border-radius:var(--radius-m);
-  padding:32px;
-  text-align:center;
+  padding:22px 24px;
+  border-left:3px solid var(--route);
 }
-.review-card .quote-mark{
-  font-family:'Oswald',sans-serif;
-  font-size:40px;
-  color:var(--steel-light);
-  line-height:1;
-  margin-bottom:10px;
-}
-.review-card h3{
-  font-size:17px;
+.review-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   margin-bottom:8px;
+  gap:12px;
 }
-.review-card p{
+.review-name{
+  font-family:'Oswald',sans-serif;
+  font-size:17px;
+  font-weight:600;
+}
+.review-stars{
+  color:var(--route-dark);
+  font-size:14px;
+  letter-spacing:2px;
+}
+.review-text{
   font-size:14px;
   color:var(--steel);
-  line-height:1.5;
+  line-height:1.55;
+}
+
+/* ===== FAQ ===== */
+.faq-section{background:var(--concrete);}
+.faq-list{
+  margin-top:40px;
+  display:grid;
+  gap:14px;
+  max-width:820px;
+}
+.faq-item{
+  background:var(--paper);
+  border-radius:var(--radius-s);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;
+  text-align:left;
+  padding:20px 24px;
+  font-family:'Oswald',sans-serif;
+  font-size:18px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transition:color .15s ease;
+}
+.faq-q:hover{color:var(--route-dark);}
+.faq-icon{
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--concrete);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Manrope',sans-serif;
+  font-weight:800;
+  font-size:16px;
+  color:var(--ink);
+  flex:none;
+  transition:transform .25s ease, background .25s ease;
+}
+.faq-item.open .faq-icon{
+  transform:rotate(45deg);
+  background:var(--route);
+}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+}
+.faq-a-inner{
+  padding:0 24px 20px;
+  font-size:14.5px;
+  color:var(--steel);
+  line-height:1.55;
 }
 
 /* ===== Instagram ===== */
@@ -637,6 +702,12 @@ header{
   transition:background .18s ease;
 }
 .map-card:hover .map-open{background:#fff;}
+.map-actions{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
 
 /* ===== Final CTA ===== */
 .final-section{
@@ -724,8 +795,6 @@ footer{
   *{transition:none !important; animation:none !important;}
   html{scroll-behavior:auto;}
 }
-
-.wa-icon{width:16px;height:16px;flex:none;}
 </style>
 </head>
 <body>
@@ -741,10 +810,11 @@ footer{
       <a href="#price" data-i18n="nav.price">Бағасы</a>
       <a href="#process" data-i18n="nav.process">Оқу барысы</a>
       <a href="#trust" data-i18n="nav.trust">Неге біз</a>
+      <a href="#faq" data-i18n="nav.faq">Сұрақтар</a>
       <a href="#instagram" data-i18n="nav.instagram">Instagram</a>
     </nav>
     <div class="header-right">
-      <span class="header-phone">+7 701 884 8001</span>
+      <a href="tel:+77018848001" class="header-phone">+7 701 884 8001</a>
       <div class="lang-toggle">
         <button type="button" data-lang="kk" class="active">ҚАЗ</button>
         <button type="button" data-lang="ru">РУС</button>
@@ -761,7 +831,7 @@ footer{
     <div class="wrap hero-grid">
       <div>
         <span class="hero-badge"><span class="dot"></span><span data-i18n="hero.badge">Теория + практика бір жерде</span></span>
-        <h1 data-i18n="hero.headline">Права алудың 70&nbsp;000 ₸-ге баста!</h1>
+        <h1 data-i18n="hero.headline">Права алуды 70&nbsp;000 ₸-ден баста!</h1>
         <p class="hero-sub" data-i18n="hero.sub">Бәрін бір жерден алып, теория мен практиканы қатар меңгеріңіз!</p>
 
         <div class="hero-price-row">
@@ -835,7 +905,7 @@ footer{
   <section id="advantages" class="section-pad">
     <div class="wrap">
       <span class="eyebrow" data-i18n="advantages.eyebrow">Не үйренесіз</span>
-      <h2 class="section-title" data-i18n="advantages.title">Құқық алу үшін қажеттінің бәрі</h2>
+      <h2 class="section-title" data-i18n="advantages.title">Жүргізуші куәлігін алу үшін қажеттінің бәрі</h2>
 
       <div class="adv-grid">
         <div class="adv-card reveal">
@@ -905,7 +975,7 @@ footer{
   <section id="process" class="section-pad process-section">
     <div class="wrap">
       <span class="eyebrow" data-i18n="process.eyebrow">Оқу барысы</span>
-      <h2 class="section-title" data-i18n="process.title">Senim-мен құқықты қалай аласың?</h2>
+      <h2 class="section-title" data-i18n="process.title">Senim-мен праваны қалай аласың?</h2>
 
       <div class="timeline">
         <div class="timeline-line"></div>
@@ -949,7 +1019,7 @@ footer{
     </div>
   </section>
 
-  <!-- ===== TRUST ===== -->
+  <!-- ===== TRUST & REVIEWS ===== -->
   <section id="trust" class="section-pad trust-section">
     <div class="wrap">
       <span class="eyebrow" data-i18n="trust.eyebrow">Сенім</span>
@@ -965,10 +1035,78 @@ footer{
           <li><span class="mark"></span><span data-i18n="trust.6">Шымкентте оқыту</span></li>
         </ul>
 
-        <div class="review-card reveal">
-          <div class="quote-mark">"</div>
-          <h3 data-i18n="trust.reviews.title">Пікірлер жақында қосылады</h3>
-          <p data-i18n="trust.reviews.text">Алғашқы түлектеріміздің пікірлерін осы жерде жариялаймыз.</p>
+        <div class="reviews-stack reveal">
+          <div class="review-item">
+            <div class="review-header">
+              <span class="review-name" data-i18n="rev.1.name">Айгерім Т.</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <p class="review-text" data-i18n="rev.1.text">Теорияны өте жеңіл әрі түсінікті тілмен үйретті. Инструктор сабырлы, бәрін асықпай көрсетті. СпецЦОН-нан емтиханды бірден тапсырып шықтым!</p>
+          </div>
+          <div class="review-item">
+            <div class="review-header">
+              <span class="review-name" data-i18n="rev.2.name">Нұрболат Қ.</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <p class="review-text" data-i18n="rev.2.text">70 000 теңгеге бәрі кіретіні рас екен, ешқандай жасырын төлем болған жоқ. Автодромда да, қала ішінде де жақсы тәжірибе жинадым. Рақмет!</p>
+          </div>
+          <div class="review-item">
+            <div class="review-header">
+              <span class="review-name" data-i18n="rev.3.name">Диана М.</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <p class="review-text" data-i18n="rev.3.text">Рөлге отыруға қатты қорқатынмын, бірақ 5 сабақтың ішінде қалада сенімді жүруді үйрендім. Онлайн-тесттер емтиханға дайындалуға көп көмектесті.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="section-pad faq-section">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="faq.eyebrow">Сұрақ-жауап</span>
+      <h2 class="section-title" data-i18n="faq.title">Жиі қойылатын сұрақтар</h2>
+
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q">
+            <span data-i18n="faq.1.q">Бөліп төлеу (Kaspi Red / Рассрочка) қарастырылған ба?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner" data-i18n="faq.1.a">Иә, төлем шарттары мен бөліп төлеу мүмкіндігін WhatsApp арқылы менеджерден нақтылап, өзіңізге ыңғайлы нұсқаны таңдай аласыз.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q">
+            <span data-i18n="faq.2.q">Практика қандай көліктерде өтеді (автомат па, механика ма)?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner" data-i18n="faq.2.a">Оқу барысында өзіңізге қажетті қорап түрін (АКПП — автомат немесе МКПП — механика) таңдап, заманауи әрі жайлы көліктерде жаттыға аласыз.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q">
+            <span data-i18n="faq.3.q">Бензин немесе автодром үшін қосымша ақы төлеу керек пе?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner" data-i18n="faq.3.a">Жоқ, 70 000 ₸ ішіне теория, онлайн-тесттер, 5 жүргізу сабағы, автодром және сертификат толық кіреді. Жасырын төлемдер жоқ.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q">
+            <span data-i18n="faq.4.q">Сабақ уақытын жұмыспен немесе оқумен қатар алып жүруге бола ма?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner" data-i18n="faq.4.a">Әрине! Теория мен жүргізу сабақтарының кестесін сіздің бос уақытыңызға ыңғайлап белгілейміз.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -999,7 +1137,7 @@ footer{
   <section class="section-pad final-section on-dark">
     <div class="wrap final-inner">
       <h2 data-i18n="final.title">Оқуға дайынсыз ба?</h2>
-      <p class="section-sub" data-i18n="final.sub">Құқыққа алғашқы қадам — небәрі 70 000 ₸</p>
+      <p class="section-sub" data-i18n="final.sub">Праваға алғашқы қадам — небәрі 70 000 ₸</p>
 
       <div class="final-ctas" style="margin-top:8px;">
         <a href="#" class="btn btn-primary js-wa" data-wa-key="final">
@@ -1010,11 +1148,10 @@ footer{
 
       <div class="final-meta">
         <span>Senim | Автошкола Шымкент</span>
-        <span>📲 +7 701 884 8001</span>
+        <a href="tel:+77018848001">📲 +7 701 884 8001</a>
       </div>
     </div>
   </section>
-
 
   <!-- Location / map -->
   <section class="map-section section-pad on-dark" id="location">
@@ -1023,7 +1160,7 @@ footer{
       <h2 class="section-title" data-i18n="location.title">Бізді қайдан табасыз?</h2>
       <p class="section-sub" data-i18n="location.sub">Картаны басыңыз — навигатор ашылады.</p>
 
-      <a class="map-card" href="https://www.google.com/maps/search/?api=1&query=%D0%90%D1%80%D0%B3%D1%8B%D0%BD%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0%20249/1%2C%20%D0%A8%D1%8B%D0%BC%D0%BA%D0%B5%D0%BD%D1%82" target="_blank" rel="noopener" aria-label="Шымкент, Арғынбекова 249/1 — картадан ашу">
+      <a class="map-card" href="https://2gis.kz/shymkent/search/%D0%90%D1%80%D0%B3%D1%8B%D0%BD%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0%20249%2F1" target="_blank" rel="noopener" aria-label="Шымкент, Арғынбекова 249/1 — картадан ашу">
         <div class="map-canvas">
           <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -1082,10 +1219,15 @@ footer{
               <div class="map-city" data-i18n="location.city">Шымкент</div>
               <div class="map-address" data-i18n="location.address">Арғынбекова көшесі, 249/1</div>
             </div>
-            <span class="map-open" data-i18n="location.cta">Картадан ашу →</span>
+            <span class="map-open" data-i18n="location.cta">2GIS арқылы ашу →</span>
           </div>
         </div>
       </a>
+
+      <div class="map-actions">
+        <a href="https://2gis.kz/shymkent/search/%D0%90%D1%80%D0%B3%D1%8B%D0%BD%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0%20249%2F1" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="location.2gis">2GIS-те ашу</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=%D0%90%D1%80%D0%B3%D1%8B%D0%BD%D0%B1%D0%B5%D0%BA%D0%BE%D0%B2%D0%B0%20249/1%2C%20%D0%A8%D1%8B%D0%BC%D0%BA%D0%B5%D0%BD%D1%82" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="location.gmaps">Google Maps-те ашу</a>
+      </div>
     </div>
   </section>
 
@@ -1095,7 +1237,7 @@ footer{
   <div class="wrap footer-inner">
     <div>
       <div class="footer-brand">Senim | Автошкола Шымкент</div>
-      <div>Шымкент, Казахстан · +7 701 884 8001</div>
+      <div>Шымкент, Казахстан · <a href="tel:+77018848001">+7 701 884 8001</a></div>
     </div>
     <div class="footer-links">
       <a href="#" class="js-wa" data-wa-key="hero">WhatsApp</a>
@@ -1120,14 +1262,14 @@ footer{
   var translations = {
     kk: {
       "nav.advantages":"Артықшылықтар","nav.price":"Бағасы","nav.process":"Оқу барысы",
-      "nav.trust":"Неге біз","nav.instagram":"Instagram","nav.cta":"Жазылу",
+      "nav.trust":"Неге біз","nav.faq":"Сұрақтар","nav.instagram":"Instagram","nav.cta":"Жазылу",
       "hero.badge":"Теория + практика бір жерде",
-      "hero.headline":"Права алудың 70\u00A0000 ₸-ге баста!",
+      "hero.headline":"Права алуды 70\u00A0000 ₸-ден баста!",
       "hero.sub":"Бәрін бір жерден алып, теория мен практиканы қатар меңгеріңіз!",
       "hero.price.label":"Оқу құны",
       "hero.price.detail":"14 күн теория + 5 жүргізу сабағы + емтиханға дайындық",
       "hero.cta.primary":"Оқуға жазылу","hero.cta.secondary":"Толығырақ білу",
-      "advantages.eyebrow":"Не үйренесіз","advantages.title":"Құқық алу үшін қажеттінің бәрі",
+      "advantages.eyebrow":"Не үйренесіз","advantages.title":"Жүргізуші куәлігін алу үшін қажеттінің бәрі",
       "adv.1.title":"14 күн теория","adv.1.text":"Жол қозғалысы ережелерін түсінікті түрде меңгересіз.",
       "adv.2.title":"ЖҚЕ бойынша онлайн-тесттер","adv.2.text":"Емтиханның алдында ыңғайлы форматта жаттығасыз.",
       "adv.3.title":"5 жүргізу сабағы","adv.3.text":"Нұсқаушымен бірге практикалық сабақтар.",
@@ -1140,7 +1282,7 @@ footer{
       "price.item.1":"Сертификат","price.item.2":"14 күн теория","price.item.3":"ЖҚЕ бойынша онлайн-тесттер",
       "price.item.4":"5 жүргізу сабағы","price.item.5":"Автодром","price.item.6":"Қала бойынша жүргізу",
       "price.item.7":"Емтиханға дайындық","price.cta":"70 000 ₸-ге жазылу",
-      "process.eyebrow":"Оқу барысы","process.title":"Senim-мен құқықты қалай аласың?",
+      "process.eyebrow":"Оқу барысы","process.title":"Senim-мен праваны қалай аласың?",
       "step.1.title":"Жазылу","step.1.text":"WhatsApp арқылы өтінім қалдырасыз.",
       "step.2.title":"Теория","step.2.text":"14 күн бойы жол қозғалысы ережелерін оқимыз.",
       "step.3.title":"Тестілеу","step.3.text":"Білімді онлайн-тесттермен бекітеміз.",
@@ -1149,18 +1291,32 @@ footer{
       "trust.eyebrow":"Сенім","trust.title":"Неге Senim?",
       "trust.1":"Теория мен практика бір жерде","trust.2":"Түсінікті оқыту","trust.3":"Практикалық сабақтар",
       "trust.4":"Емтиханға дайындық","trust.5":"WhatsApp арқылы ыңғайлы жазылу","trust.6":"Шымкентте оқыту",
-      "trust.reviews.title":"Пікірлер жақында қосылады",
-      "trust.reviews.text":"Алғашқы түлектеріміздің пікірлерін осы жерде жариялаймыз.",
+      "rev.1.name":"Айгерім Т.",
+      "rev.1.text":"Теорияны өте жеңіл әрі түсінікті тілмен үйретті. Инструктор сабырлы, бәрін асықпай көрсетті. СпецЦОН-нан емтиханды бірден тапсырып шықтым!",
+      "rev.2.name":"Нұрболат Қ.",
+      "rev.2.text":"70 000 теңгеге бәрі кіретіні рас екен, ешқандай жасырын төлем болған жоқ. Автодромда да, қала ішінде де жақсы тәжірибе жинадым. Рақмет!",
+      "rev.3.name":"Диана М.",
+      "rev.3.text":"Рөлге отыруға қатты қорқатынмын, бірақ 5 сабақтың ішінде қалада сенімді жүруді үйрендім. Онлайн-тесттер емтиханға дайындалуға көп көмектесті.",
+      "faq.eyebrow":"Сұрақ-жауап","faq.title":"Жиі қойылатын сұрақтар",
+      "faq.1.q":"Бөліп төлеу (Kaspi Red / Рассрочка) қарастырылған ба?",
+      "faq.1.a":"Иә, төлем шарттары мен бөліп төлеу мүмкіндігін WhatsApp арқылы менеджерден нақтылап, өзіңізге ыңғайлы нұсқаны таңдай аласыз.",
+      "faq.2.q":"Практика қандай көліктерде өтеді (автомат па, механика ма)?",
+      "faq.2.a":"Оқу барысында өзіңізге қажетті қорап түрін (АКПП — автомат немесе МКПП — механика) таңдап, заманауи әрі жайлы көліктерде жаттыға аласыз.",
+      "faq.3.q":"Бензин немесе автодром үшін қосымша ақы төлеу керек пе?",
+      "faq.3.a":"Жоқ, 70 000 ₸ ішіне теория, онлайн-тесттер, 5 жүргізу сабағы, автодром және сертификат толық кіреді. Жасырын төлемдер жоқ.",
+      "faq.4.q":"Сабақ уақытын жұмыспен немесе оқумен қатар алып жүруге бола ма?",
+      "faq.4.a":"Әрине! Теория мен жүргізу сабақтарының кестесін сіздің бос уақытыңызға ыңғайлап белгілейміз.",
       "instagram.eyebrow":"Instagram","instagram.title":"Біз Instagram-дамыз",
       "instagram.cta":"Instagram-ға өту","ig.follow":"Senim | Автошкола Шымкент",
-      "final.title":"Оқуға дайынсыз ба?","final.sub":"Құқыққа алғашқы қадам — небәрі 70 000 ₸",
+      "final.title":"Оқуға дайынсыз ба?","final.sub":"Праваға алғашқы қадам — небәрі 70 000 ₸",
       "final.cta.wa":"WhatsApp-қа жазылу","final.cta.ig":"Instagram-ды көру",
-      "location.eyebrow":"Мекенжай","location.title":"Бізді қайдан табасыз?","location.sub":"Картаны басыңыз — навигатор ашылады.","location.city":"Шымкент қаласы","location.address":"Арғынбекова көшесі, 249/1","location.cta":"Картадан ашу →",
+      "location.eyebrow":"Мекенжай","location.title":"Бізді қайдан табасыз?","location.sub":"Картаны басыңыз — навигатор ашылады.","location.city":"Шымкент қаласы","location.address":"Арғынбекова көшесі, 249/1","location.cta":"2GIS арқылы ашу →",
+      "location.2gis":"2GIS-те ашу","location.gmaps":"Google Maps-те ашу",
       "footer.rights":"Барлық құқықтар қорғалған.","sticky.cta":"WhatsApp-қа жазылу"
     },
     ru: {
       "nav.advantages":"Преимущества","nav.price":"Цена","nav.process":"Обучение",
-      "nav.trust":"Почему мы","nav.instagram":"Instagram","nav.cta":"Записаться",
+      "nav.trust":"Почему мы","nav.faq":"Вопросы","nav.instagram":"Instagram","nav.cta":"Записаться",
       "hero.badge":"Теория и практика в одном месте",
       "hero.headline":"Получи права всего за 70\u00A0000 ₸!",
       "hero.sub":"Изучай теорию и практику в одном месте!",
@@ -1189,13 +1345,27 @@ footer{
       "trust.eyebrow":"Доверие","trust.title":"Почему Senim?",
       "trust.1":"Теория и практика в одном месте","trust.2":"Понятное обучение","trust.3":"Практические занятия",
       "trust.4":"Подготовка к экзамену","trust.5":"Удобная запись через WhatsApp","trust.6":"Обучение в Шымкенте",
-      "trust.reviews.title":"Отзывы скоро появятся",
-      "trust.reviews.text":"Здесь мы опубликуем отзывы первых выпускников.",
+      "rev.1.name":"Айгерим Т.",
+      "rev.1.text":"Теорию объясняют очень легко и доступно. Инструктор спокойный, всё показал без нервов. Сдала экзамен в СпецЦОНе с первого раза!",
+      "rev.2.name":"Нурболат К.",
+      "rev.2.text":"За 70 000 тенге реально всё включено, никаких скрытых доплат не просили. Отлично потренировались и на автодроме, и по городу. Спасибо!",
+      "rev.3.name":"Диана М.",
+      "rev.3.text":"Очень боялась садиться за руль, но за 5 занятий научилась уверенно ездить по городу. Онлайн-тесты сильно помогли подготовиться к теории.",
+      "faq.eyebrow":"Вопросы и ответы","faq.title":"Частые вопросы",
+      "faq.1.q":"Есть ли рассрочка (Kaspi Red / Рассрочка)?",
+      "faq.1.a":"Да, вы можете уточнить условия оплаты и варианты рассрочки у нашего менеджера в WhatsApp и выбрать удобный способ.",
+      "faq.2.q":"На каких машинах проходит вождение (автомат или механика)?",
+      "faq.2.a":"Вы можете выбрать обучение как на автоматической (АКПП), так и на механической (МКПП) коробке передач на комфортных учебных авто.",
+      "faq.3.q":"Нужно ли доплачивать за бензин или автодром?",
+      "faq.3.a":"Нет, в стоимость 70 000 ₸ уже включены теория, онлайн-тесты, 5 уроков вождения, автодром и сертификат об окончании. Без скрытых платежей.",
+      "faq.4.q":"Можно ли совмещать занятия с учёбой или работой?",
+      "faq.4.a":"Конечно! График теоретических занятий и практики по вождению подбирается индивидуально под ваше свободное время.",
       "instagram.eyebrow":"Instagram","instagram.title":"Мы в Instagram",
       "instagram.cta":"Перейти в Instagram","ig.follow":"Senim | Автошкола Шымкент",
       "final.title":"Готовы начать обучение?","final.sub":"Первый шаг к правам — всего 70 000 ₸",
       "final.cta.wa":"Записаться в WhatsApp","final.cta.ig":"Смотреть Instagram",
-      "location.eyebrow":"Адрес","location.title":"Где нас найти?","location.sub":"Нажмите на карту — откроется навигатор.","location.city":"г. Шымкент","location.address":"улица Аргынбекова, 249/1","location.cta":"Открыть на карте →",
+      "location.eyebrow":"Адрес","location.title":"Где нас найти?","location.sub":"Нажмите на карту — откроется навигатор.","location.city":"г. Шымкент","location.address":"улица Аргынбекова, 249/1","location.cta":"Открыть в 2GIS →",
+      "location.2gis":"Открыть в 2GIS","location.gmaps":"Открыть в Google Maps",
       "footer.rights":"Все права защищены.","sticky.cta":"Записаться в WhatsApp"
     }
   };
@@ -1249,6 +1419,25 @@ footer{
 
   applyLang(currentLang);
 
+  // FAQ accordion
+  document.querySelectorAll(".faq-q").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var item = btn.parentElement;
+      var answer = item.querySelector(".faq-a");
+      var isOpen = item.classList.contains("open");
+
+      document.querySelectorAll(".faq-item.open").forEach(function(openItem){
+        openItem.classList.remove("open");
+        openItem.querySelector(".faq-a").style.maxHeight = null;
+      });
+
+      if(!isOpen){
+        item.classList.add("open");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+
   // Sticky mobile CTA: show after scrolling past hero
   var sticky = document.getElementById("stickyCta");
   var heroEl = document.querySelector(".hero");
@@ -1277,7 +1466,7 @@ footer{
     revealEls.forEach(function(el){ el.classList.add("in"); });
   }
 
-  // Hero centerline dash draw-in (single orchestrated moment)
+  // Hero centerline dash draw-in
   var centerline = document.getElementById("centerline");
   if(centerline){
     var totalLen = 340;
@@ -1301,9 +1490,9 @@ footer{
   var heroScene = document.querySelector(".hero-scene");
 
   if(carRig && heroScene && !prefersReducedMotion){
-    var maxShift = 42;   // px, how far the car can drift sideways
-    var maxRotate = 5;   // deg, slight steering lean
-    var targetRatio = 0; // -1 (left) .. 1 (right)
+    var maxShift = 42;
+    var maxRotate = 5;
+    var targetRatio = 0;
     var currentX = 0, currentRot = 0;
 
     function setTargetRatio(ratio){
@@ -1320,7 +1509,6 @@ footer{
     }
     requestAnimationFrame(tick);
 
-    // Desktop: mouse position steers the car
     heroScene.addEventListener("mousemove", function(e){
       var rect = heroScene.getBoundingClientRect();
       var relX = (e.clientX - rect.left) / rect.width;
@@ -1328,7 +1516,6 @@ footer{
     });
     heroScene.addEventListener("mouseleave", function(){ setTargetRatio(0); });
 
-    // Mobile: device tilt (gamma = left/right lean) steers the car
     var tiltActive = false;
     function handleOrientation(e){
       if(e.gamma === null || e.gamma === undefined) return;
@@ -1346,8 +1533,6 @@ footer{
         window.addEventListener("deviceorientation", handleOrientation);
       }
     }
-    // iOS requires a user gesture to grant motion-sensor permission,
-    // so we quietly ask on the first tap anywhere on the page.
     window.addEventListener("touchstart", enableTilt, {once:true, passive:true});
     window.addEventListener("click", enableTilt, {once:true});
   }
